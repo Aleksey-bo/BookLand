@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    {% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@200;300;500&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.4/tiny-slider.css">
+    <!--[if (lt IE 9)]><script src="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.4/min/tiny-slider.helper.ie8.js"></script><![endif]-->
+
+    <link rel="stylesheet" href="{% static 'css/reset.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>BookLand</title>
+</head>
+
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header__wrapper">
+                <div class="header__inner">
+                    <a href="/" class="header__logo">BookLand</a>
+                    <div class="select">
+                        <span class="select__selected-option">Category</span>
+                        <ul class="select__options">
+                            {% for cat in links %}
+                                <li><a href="{{ cat.get_url }}">{{ cat.name }}</a></li>
+                            {% endfor %}
+                            <li><a href="{% url 'index' %}">All products</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="header__inner">
+                    <input class="header__input" type="text" placeholder="Search">
+                    <button class="header__button button">Search</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="content">
+        <div class="product">
+            <div class="container">
+                <div class="product__wrapper">
+                    <div class="product__inner">
+                        <div class="product__box">
+                            <div class="slider-container">
+                                <button class="slider__btn slider__btn__prev">
+                                    <?xml version="1.0" encoding="UTF-8"?>
+                                    <svg height="40px" viewBox="0 0 7 12" version="1.1"
+                                        xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                        <!-- Generator: Sketch 52.5 (67469) - http://www.bohemiancoding.com/sketch -->
+                                        <title>keyboard_arrow_right</title>
+                                        <desc>Created with Sketch.</desc>
+                                        <g id="Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                            <g id="Rounded" transform="translate(-687.000000, -2464.000000)">
+                                                <g id="Hardware" transform="translate(100.000000, 2404.000000)">
+                                                    <g id="-Round-/-Hardware-/-keyboard_arrow_right"
+                                                        transform="translate(578.000000, 54.000000)">
+                                                        <g>
+                                                            <rect id="Rectangle-Copy-105" x="0" y="0" width="24"
+                                                                height="24"></rect>
+                                                            <path
+                                                                d="M9.29,15.88 L13.17,12 L9.29,8.12 C8.9,7.73 8.9,7.1 9.29,6.71 C9.68,6.32 10.31,6.32 10.7,6.71 L15.29,11.3 C15.68,11.69 15.68,12.32 15.29,12.71 L10.7,17.3 C10.31,17.69 9.68,17.69 9.29,17.3 C8.91,16.91 8.9,16.27 9.29,15.88 Z"
+                                                                id="🔹-Icon-Color" fill="#ccc"></path>
+                                                        </g>
+                                                    </g>
+                                                </g>
+                                            </g>
+                                        </g>
+                                    </svg>
+                                </button>
+                                <button class="slider__btn slider__btn__next">
+                                    <?xml version="1.0" encoding="UTF-8"?>
+                                    <svg height="40px" viewBox="0 0 7 12" version="1.1"
+                                        xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                        <!-- Generator: Sketch 52.5 (67469) - http://www.bohemiancoding.com/sketch -->
+                                        <title>keyboard_arrow_right</title>
+                                        <desc>Created with Sketch.</desc>
+                                        <g id="Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                            <g id="Rounded" transform="translate(-687.000000, -2464.000000)">
+                                                <g id="Hardware" transform="translate(100.000000, 2404.000000)">
+                                                    <g id="-Round-/-Hardware-/-keyboard_arrow_right"
+                                                        transform="translate(578.000000, 54.000000)">
+                                                        <g>
+                                                            <rect id="Rectangle-Copy-105" x="0" y="0" width="24"
+                                                                height="24"></rect>
+                                                            <path
+                                                                d="M9.29,15.88 L13.17,12 L9.29,8.12 C8.9,7.73 8.9,7.1 9.29,6.71 C9.68,6.32 10.31,6.32 10.7,6.71 L15.29,11.3 C15.68,11.69 15.68,12.32 15.29,12.71 L10.7,17.3 C10.31,17.69 9.68,17.69 9.29,17.3 C8.91,16.91 8.9,16.27 9.29,15.88 Z"
+                                                                id="🔹-Icon-Color" fill="#ccc"></path>
+                                                        </g>
+                                                    </g>
+                                                </g>
+                                            </g>
+                                        </g>
+                                    </svg>
+                                </button>
+                                <div class="product__slider slider">
+                                    {% for image in slider %}
+                                    <div class="slide">
+                                        <img src="{{ image.image.url }}" alt="books">
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product__box">
+                            <div class="product__info">
+                                <h1 class="product__info__name">{{ product.name }}</h1>
+                                <p class="product__info__item"><span>Price:</span> ${{ product.price }}</p>
+                                {% if product.stock != 'D' %}
+                                <button class="product__button button">
+                                    <a href="{% url 'add_cart' product.id %}">Add to cart</a>
+                                </button>
+                                {% endif %}
+                                <div class="product__line"></div>
+                                <p class="product__info__item"><span>Article:</span> #64a12d</p>
+                                <div class="product__line"></div>
+                                <div class="product__info__items">
+                                    <p class="product__info__item"><span>Author:</span> {{ product.author }}</p>
+                                    <p class="product__info__item"><span>Language:</span> En</p>
+                                    <p class="product__info__item"><span>Country:</span> {{ product.country }}</p>
+                                    <p class="product__info__item"><span>Page Number:</span> {{ product.page_number }}</p>
+                                    <p class="product__info__item"><span>Material:</span> Metal</p>
+                                    <p class="product__info__item"><span>Date&nbsp;Added:</span> {{ product.date }}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product__box product__box-wide">
+                            <h2 class="product__descr__title">Description</h2>
+                            <div class="product__line"></div>
+                            <p class="product__descr__text">{{ product.description | safe}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        </div>
+    </section>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.2/min/tiny-slider.js"></script>
+    <script>
+        var slider = tns({
+            container: '.slider',
+            items: 1,
+            slideBy: 'page',
+            autoplay: true,
+            nav: false,
+            autoplayButtonOutput: false,
+            mouseDrag: true,
+            prevButton: '.slider__btn__prev',
+            nextButton: '.slider__btn__next'
+        });
+    </script>

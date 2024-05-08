@@ -1,0 +1,278 @@
+body{
+    height: 100%;
+    margin: 0;
+    min-height: 400px;
+    font-family: sans-serif;
+}
+
+a{
+    text-decoration: none;
+    color: black;
+}
+
+.header{
+    height: 50px;
+    background-color: brown;
+    display: flex;
+}
+
+.logo{
+    flex: 1;
+    float: left;
+    padding: 8px;
+}
+
+.logo_img{
+    width: 32px;
+    height: 32px;
+}
+
+.search_block {
+    position: relative;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+  
+.search_con {
+    width: 400px;
+    height: 20px;
+    border-radius: 2px;
+}
+  
+.search_button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+  
+.search_button i {
+    font-size: 15px;
+    color: #deb887;
+}
+
+.auth{
+    flex: 1;
+    text-align: right;
+    padding: 8px;
+}
+
+.log_in, .registration{
+    width: 32px;
+    height: 32px;
+}
+
+.container{
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.category{
+    display: flex;
+    justify-content: space-between;
+    height: 50px;
+}
+
+.category_link:hover{
+    color: burlywood;
+}
+
+.category_item {
+    margin-right: 10px;
+    padding: 15px;
+    font-size: 30px;
+    font-weight: bold;
+}
+  
+.category_item:last-child {
+    margin-right: 0;
+}
+
+.product_cards{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.cards{
+    flex-basis: calc(33.33% - 20px);
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 0;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.cards:hover{
+    transform: scale(1.1);
+}
+
+.product_img{
+    width: 100%;
+    max-height: 200px;
+    object-fit: cover;
+    border-radius: 5px;
+    padding: 0;
+}
+
+.product_text{
+    margin-top: 10px;
+}
+
+.product_price{
+    margin-top: 5px;
+    font-size: bold;
+}
+
+footer {
+    background-color:dimgrey;
+    padding: 20px;
+    margin-top: 20px;
+}
+  
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+  
+.footer-container p {
+    text-align: center;
+}
+
+.auth_page{
+    width: 300px;
+    height: 400px;
+    background-color: dimgrey;
+    border-radius: 10px;
+    margin: 0 auto;
+    margin-top: 20px;
+    margin-bottom: 100px;
+}
+
+.login{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    height: 30px;
+}
+
+.password{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 40px;
+    height: 30px;
+}
+
+.auth_label{
+    text-align: center;
+    font-size: 50px;
+    font-weight: bold;
+    padding: 20px;
+}
+
+.auth_block{
+    margin: 15px;
+}
+
+.submit_button_con{
+    display: flex;
+    justify-content: space-between;
+}
+
+.submit_button{
+    width: 150px;
+    height: 50px;
+    font-size: 32px;
+    text-align: center;
+    margin: 0 auto;
+    background-color: brown;
+    color: #deb887;
+    border-radius: 2px;
+    border: none;
+}
+
+.submit_button:hover{
+    background-color: white;
+    color: #deb887;
+    border: 2px solid brown;
+}
+
+.title{
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.product_block{
+    display: flex;
+    margin-bottom: 40px;
+}
+
+.big_product_image{
+    width: 350px;
+    height: 350px;
+    border-radius: 20px;
+    flex: 1;
+    transition: width 2s height 2s;
+}
+
+.big_product_image:hover{
+    width: 500px;
+    height: 500px;
+}
+
+.product_shop_info{
+    padding-left: 20px;
+    flex: 2;
+}
+
+.product_info{
+    display: flex;
+}
+
+.first_info{
+    flex: 1;
+}
+
+.second_info{
+    flex: 2;
+}
+
+.button{
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+
+.cart_button{
+    width: 150px;
+    height: 50px;
+    background-color: brown;
+    color: #deb887;
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    border-radius: 2px;
+    border: none;
+}
+
+.cart_button:hover{
+    background-color: white;
+    color: darkgreen;
+    border: 2px solid brown;
+}
+
+.discription{
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.discription_text{
+    font-size: 20px;
+    padding: 10px;
+}
+
+.hline{
+    border: 2px solid dimgrey;
+}

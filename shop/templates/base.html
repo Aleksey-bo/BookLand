@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+{% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@200;300;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/reset.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>BookLand</title>
+</head>
+
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header__wrapper">
+                <div class="header__inner">
+                    <a href="{% url 'index' %}" class="header__logo">BookLand</a>
+                    <div class="select">
+                        <span class="select__selected-option">Category</span>
+                        <ul class="select__options">
+                            {% for cat in links %}
+                                <li><a href="{{ cat.get_url }}">{{ cat.name }}</a></li>
+                            {% endfor %}
+                            <li><a href="{% url 'index' %}">All products</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="header__inner">
+                    <form method="get" action="{% url 'index' %}">
+                        <input class="header__input" type="text" placeholder="Search" name="search">
+                        <button class="header__button button">Search</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    {% block content %}
+
+    {% endblock %}
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__wrapper">
+                <p class="footer__text">© 2023 Your Website. All Rights Reserved. </p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="{% static 'js/script.js' %}"></script>
+</body>
+
+</html>

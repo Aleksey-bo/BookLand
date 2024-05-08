@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    {% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@200;300;500&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="{% static 'css/reset.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>BookLand</title>
+</head>
+
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header__wrapper">
+                <div class="header__inner">
+                    <a href="/" class="header__logo">BookLand</a>
+                    <div class="select">
+                        <span class="select__selected-option">Category</span>
+                        <ul class="select__options">
+                            <li><a href="#">Math</a></li>
+                            <li><a href="#">History</a></li>
+                            <li><a href="/">All products</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="header__inner">
+                    <input class="header__input" type="text" placeholder="Search">
+                    <button class="header__button button">Search</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="content">
+        <div class="cart">
+            <div class="container">
+                <div class="cart__wrapper">
+                    <div class="cart__header">
+                        <h1 class="cart__title title">Cart</h1>
+                        <a href="{% url 'delete_cart' %}">
+                            <button class="cart__btn button btn-blue" type="button">Delete</button>
+                        </a>
+                    </div>
+                    <div class="line"></div>
+                    {% if cart.active %}
+                        <ul class="cart__list">
+                            {% for cart_item in cart_items %}
+                            <li class="cart__list__item">
+                                <div class="cart__list__item__box">
+                                    <img class="cart__list__item__img" src="{{ cart_item.product.image.url }}" alt="Goose">
+                                    <div>
+                                        <span class="cart__list__item__name">{{ cart_item.product.name }}</span>
+                                    </div>
+                                </div>
+                                <div class="cart__list__item__box">
+                                    <div>
+                                        <a href="{% url 'remove_product' cart_item.product.id %}">
+                                            <button class="cart__list__item__btn cart__decrement">-</button>
+                                        </a>
+                                        <input class="cart__list__item__input" type="text" value="{{ cart_item.quantity }}">
+                                        <a href="{% url 'add_to_cart' cart_item.product.id %}">
+                                            <button class="cart__list__item__btn cart__increment">+</button>
+                                        </a>
+                                    </div>
+                                    <div class="cart__list__item__price">$<span>{{ cart_item.sub_total }}</span></div>
+                                </div>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                    <div class="line"></div>
+
+
+                    <form method="post" action="{% url 'new_order' %}">
+                        {% csrf_token %}
+                        <div class="cart__info">
+                            <h2 class="cart__info__title">Order Information</h2>
+                            <div class="cart__info__wrapper">
+                                <div class="cart__info__box">
+                                    <label class="cart__info__label" for="first-name">First Name</label>
+                                    <input class="cart__info__input" type="text" id="first-name" name="first_name">
+                                </div>
+                                <div class="cart__info__box">
+                                    <label class="cart__info__label" for="last-name">Last Name</label>
+                                    <input class="cart__info__input" type="text" id="last-name" name="last_name">
+                                </div>
+                                <div class="cart__info__box">
+                                    <label class="cart__info__label" for="country">Country</label>
+                                    <select class="cart__info__select" id="country" name="country">
+                                        {% for cnt in country %}
+                                            <option value="{{ cnt.id }}">{{ cnt.name }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                <div class="cart__info__box">
+                                    <label class="cart__info__label" for="email">Email</label>
+                                    <input class="cart__info__input" type="text" id="email" name="email">
+                                </div>
+                                <div class="cart__info__box">
+                                    <label class="cart__info__label" for="phone-number">Phone Number</label>
+                                    <input class="cart__info__input" type="text" id="phone-number" name="phone_number">
+                                </div>
+                                <div class="cart__info__box">
+                                    <label class="cart__info__label" for="zip-code">ZIP code</label>
+                                    <input class="cart__info__input" type="text" id="zip-code" name="address">
+                                </div>
+                                </div>
+                                <div class="cart__info__box cart__info__box--combined">
+                                    <label class="cart__info__label" for="delivery">Delivery Method</label>
+                                    <select class="cart__info__select" id="delivery">
+                                        <option value="ukrposhta">Ukrposhta</option>
+                                        <option value="nova-poshta">Nova Poshta</option>
+                                    </select>
+                                </div>
+                            </div>
+                        <div class="cart__info__footer">
+                            <button class="cart__button button" id="showPopupButton" type="submit">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="overlay">
+        <div class="modal">
+            <div class="modal__content">
+                <div class="modal__header">
+                    <h5 class="modal__title" id="orderSummaryModalLabel">Order Summary</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="#000"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="18" y1="6" x2="6" y2="18" />
+                            <line x1="6" y1="6" x2="18" y2="18" />
+                        </svg>
+                    </button>
+                </div>
+                <div class="modal__body">
+                    <p>First Name: <span id="summary-first-name"></span></p>
+                    <p>Last Name: <span id="summary-last-name"></span></p>
+                    <p>Country: <span id="summary-country"></span></p>
+                    <p>Email: <span id="summary-email"></span></p>
+                    <p>Phone Number: <span id="summary-phone-number"></span></p>
+                    <p>ZIP Code: <span id="summary-zip-code"></span></p>
+                    <p>Delivery Method: <span id="summary-delivery"></span></p>
+                </div>
+                <div class="modal__card">
+                    <div class="modal__card-number" >
+                        <label for="modal__card-number">Card number</label>
+                        <input
+                            id="modal__card-number"
+                            type="text"
+                        >
+                    </div>
+                    <div class="modal__until-date" >
+                        <label for="modal__until-date">Util date</label>
+                        <input
+                            id="modal__until-date"
+                            type="text"
+                        >
+                    </div>
+                    <div class="modal__cvv" >
+                        <label for="modal__cvv">CVV</label>
+                        <input
+                            id="modal__cvv"
+                            type="text"
+                        >
+                    </div>
+                </div>
+                <div class="modal__footer">
+                    <button type="button" class="button btn-gray btn-close" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="button btn-blue">Pay</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__wrapper">
+                <p class="footer__text">© 2023 Your Website. All Rights Reserved. </p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="{% static 'js/script.js' %}"></script>
+    <script src="{% static 'js/script-cart-page.js' %}"></script>
+</body>
+
+</html>

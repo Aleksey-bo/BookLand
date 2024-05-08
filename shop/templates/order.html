@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+            width: 794px;
+            /* A4 width in pixels */
+            height: 1123px;
+            /* A4 height in pixels */
+            font-family: 'Arial', sans-serif;
+            padding: 15px;
+        }
+
+        .content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        h1 {
+            font-size: 24px;
+        }
+
+        table {
+            margin-top: 50px;
+            border-collapse: collapse;
+            border: 1px solid black;
+            width: 90%;
+        }
+
+        th,
+        td {
+            border: 1px solid black;
+            box-sizing: border-box;
+        }
+
+        td img {
+            height: 70px;
+        }
+
+        th {
+            padding: 12px;
+            height: 43px;
+        }
+
+        td {
+            text-align: center;
+            vertical-align: middle;
+            height: 35px;
+            padding: 0 12px;
+        }
+
+        .price {
+            text-align: right;
+        }
+
+        .info {
+            width: 100%;
+            margin-top: auto;
+        }
+
+        @media print {
+
+            body,
+            html {
+                width: 210mm;
+                height: 297mm;
+            }
+
+            @page {
+                size: A4;
+                margin: 0mm;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="content">
+        <h1>ID {{ order.order_id }}</h1>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Image</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for cart_item in cart_items %}
+                    <tr>
+                        <td>{{ cart_item.product.name }}</td>
+                        <td>
+                            <img src="{{ cart_item.product.image.url }}"
+                                alt>
+                        </td>
+                        <td>{{ cart_item.product.quantity }}</td>
+                        <td>{{ cart_item.sub_total }}$</td>
+                    </tr>
+                {% endfor %}
+                <tr>
+                    <td colspan="4" class="price">Full price: {{ full_price }}$</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="table"></div>
+
+        <div class="info">
+            <p>FIO: {{ order.first_name }} {{order.last_name}}</p>
+            <address>Address: {{ order.address }}</address>
+            <p>Date: {{ order.date }}</p>
+        </div>
+        <div class="spacer"></div>
+        <div class="words">
+        </div>
+    </div>
+</body>
+
+</html>

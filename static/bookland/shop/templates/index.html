@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <section class="content">
+        <div class="books">
+            <div class="container">
+                <div class="books__list">
+                    {% for product in products %}
+                    <a href="{{ product.get_url }}">
+                        <div class="books__list__item">
+                            <img src="{{ product.image.url }}" alt="" class="books__list__item-img">
+                            <div class="books__list__item-info">
+                                <p class="books__list__item-descr">{{ product.name }}</p>
+                                <span class="books__list__item-price">${{ product.price}}</span>
+                            </div>
+                        </div>
+                    </a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

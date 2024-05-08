@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+{% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@200;300;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/reset.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>BookLand</title>
+</head>
+
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header__wrapper">
+                <div class="header__inner">
+                    <a href="{% url 'index' %}" class="header__logo">BookLand</a>
+                    <div class="select">
+                        <span class="select__selected-option">Category</span>
+                        <ul class="select__options">
+                            {% for cat in links %}
+                                <li><a href="{{ cat.get_url }}">{{ cat.name }}</a></li>
+                            {% endfor %}
+                            <li><a href="{% url 'index' %}">All products</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="header__inner">
+                    <form method="get" action="{% url 'index' %}">
+                        <input class="header__input" type="text" placeholder="Search" name="search">
+                        <button class="header__button button">Search</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </header>
+    <section class="content">
+        <div class="books">
+            <div class="container">
+                <div class="books__list">
+                    {% for product in products %}
+                    <div class="books__list__item">
+                        <a href="{{ product.get_url }}">
+                            <img src="{{ product.image.url }}" alt="" class="books__list__item-img">
+                            <div class="books__list__item-info">
+                                <p class="books__list__item-descr">{{ product.name }}</p>
+                                <div class="rating__wrapper">
+                                  <fieldset class="rating">
+                                    <input type="radio" id="star5" name="rating" value="5" /><label class="full" for="star5"
+                                      title="Awesome - 5 stars"></label>
+                                    <input type="radio" id="star4half" name="rating" value="4 and a half" /><label class="half"
+                                      for="star4half" title="Pretty good - 4.5 stars"></label>
+                                    <input type="radio" id="star4" name="rating" value="4" /><label class="full" for="star4"
+                                      title="Pretty good - 4 stars"></label>
+                                    <input type="radio" id="star3half" name="rating" value="3 and a half" /><label class="half"
+                                      for="star3half" title="Meh - 3.5 stars"></label>
+                                    <input type="radio" id="star3" name="rating" value="3" /><label class="full" for="star3"
+                                      title="Meh - 3 stars"></label>
+                                    <input type="radio" id="star2half" name="rating" value="2 and a half" /><label class="half"
+                                      for="star2half" title="Kinda bad - 2.5 stars"></label>
+                                    <input type="radio" id="star2" name="rating" value="2" /><label class="full" for="star2"
+                                      title="Kinda bad - 2 stars"></label>
+                                    <input type="radio" id="star1half" name="rating" value="1 and a half" /><label class="half"
+                                      for="star1half" title="Meh - 1.5 stars"></label>
+                                    <input type="radio" id="star1" name="rating" value="1" /><label class="full" for="star1"
+                                      title="Sucks big time - 1 star"></label>
+                                    <input type="radio" id="starhalf" name="rating" value="half" /><label class="half" for="starhalf"
+                                      title="Sucks big time - 0.5 stars"></label>
+                                  </fieldset>
+                                </div>
+                                {% if product.stock == 'S' %}
+                                    <span class="status__stock">In stock</span>
+                                {% elif product.stock == 'E' %}
+                                    <span class="status__ended">Ended</span>
+                                {% else %}
+                                    <span class="status__delivery" data-status="delivery">Delivery expected</span>
+                                {% endif %}
+                                <span class="books__list__item-price">${{ product.price }}</span>
+                            </div>
+                        </a>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__wrapper">
+                <p class="footer__text">© 2023 Your Website. All Rights Reserved. </p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="{% static 'js/script.js' %}"></script>
+    <script src="{% static 'js/script-index.js' %}"></script>
+</body>
+
+</html>
